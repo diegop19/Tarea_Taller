@@ -73,7 +73,7 @@ def registro_de_Actividades():
      print()
      print("Opciones:")
      print()
-     print("(11) Registro de  actividades")
+     print("(11) Registrar actividad")
      print()
      print("(12) Borrar actividad")
      print()
@@ -227,14 +227,18 @@ def code():
     lineas=archivo.readlines()
     archivo.close
 
-    ultimaLinea= lineas[-1]
     
-    lista= ultimaLinea.split(",")
+    if lineas != []:
+        
+        ultimaLinea= lineas[-1]
+        lista= ultimaLinea.split(",")
 
-    codigoI=int(lista[0])
+        codigoI=int(lista[0])
 
-    codigoNuevo+= codigoI + 1
-
+        codigoNuevo+= codigoI + 1
+        
+    else:
+        codigoNuevo+=1
     return codigoNuevo
     
 
@@ -248,7 +252,7 @@ def contarDigitos(x):
 
     return contador  
         
-    
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~   
         
 """
 Nombre: Borrar actividad
@@ -353,29 +357,36 @@ Restricciones: No debe permitir valores en blanco o nulos
 """ 
 
 def buscarUsuario():
+    print()
+    usuario= input("Ingrese su usuario: ")
+    print()
+    coincidencia = False
+    if usuario != "":
+        
+       archivo = open("Bitacora.txt", encoding="utf-8",mode = "r")
+       lineas = archivo.readlines()
+       archivo.close()
 
-    usuario= input("Ingrese su usario: ")
+       for linea in lineas:
 
-    archivo= open("Bitacora.txt",encoding="utf-8",mode = "r")
-    lineas=archivo.readlines()
-    archivo.close
-    
+           contenido = linea.strip().split(",")
+           registro= contenido[3]
 
-    
-
-    ultimaLinea= lineas[-1]
-    
-    lista= ultimaLinea.split(",")
-
-    
-    return lista
-
-
-
-    
-    #return busquedas()
-
-
+           if usuario == registro:
+               coincidencia=True
+               #print("La coicidencia encontrada es: ")
+               print(linea)
+            
+           else:
+               continue
+       if coincidencia == True:
+           print("Estas fueron la o las coincidencias encontradas ^ ")
+       else:
+           print("Error: no hay coincidencias en el usuario, verifique que este escrito correctamente")
+            
+    else:
+        print("Error: el usuario no debe ser vacio")
+        
 
 """
 Nombre: Buscar por aplicacion 
@@ -385,8 +396,35 @@ Restricciones: No debe permitir valores en blanco o nulos
 """ 
 
 def buscarAplicacion():
-    print("estas en buscar aplicacion")
-    return busquedas()
+    print()
+    aplicacion= input("Ingrese el nombre de la aplicaion a buscar:  ")
+    print()
+    coincidencia = False
+    if aplicacion != "":
+        
+       archivo = open("Bitacora.txt", encoding="utf-8",mode = "r")
+       lineas = archivo.readlines()
+       archivo.close()
+
+       for linea in lineas:
+
+           contenido = linea.strip().split(",")
+           registro= contenido[4]
+
+           if aplicacion == registro:
+               coincidencia=True
+               print(linea)
+            
+           else:
+               continue
+       if coincidencia == True:
+           print("Estas fueron la o las coincidencias encontradas ^ ")
+       else:
+           print("Error: no hay coincidencias en el nombre de la aplicacion, verifique que este escrito correctamente")
+            
+    else:
+        print("Error: la aplicacion no debe ser vacia")
+        
 
 """
 Nombre: Buscar por Fecha 
@@ -396,8 +434,39 @@ Restricciones: No debe permitir valores en blanco o nulos
 """ 
 
 def buscarFecha():
-    print("estas en buscar fecha")
-    return busquedas()
+    print()
+    print("La busqueda de fechas se realiza por rangos, ingrese las fechas entre las cuales quiere buscar actividades")
+    print("recuerde que el formato de fechas debe ser DD/MM/YY")
+    print()
+    
+    inicio= input("Ingrese el inicio : ")
+    final= input("Ingrese el final : ")
+    print()
+
+    if inicio != "" and final != "":
+        archivo = open("Bitacora.txt", encoding="utf-8", mode="r")
+        lineas = archivo.readlines()
+        archivo.close()
+
+        actividades = []
+
+        for linea in lineas:
+            contenido = linea.strip().split(",")
+            registro = contenido[1]
+            print(linea[-1])
+
+            if inicio <= registro <= final:
+                actividades += [linea]
+                
+        if actividades:
+            for actividad in actividades:
+                print(actividad)
+        else:   
+           print("No se encontraron actividades en el rango de fechas especificado.")
+            
+    else:
+        print("Error: los valores de inicio y final no deben ser vacios")
+        return buscarfecha()
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -406,8 +475,20 @@ Nombre: Cantidad de mensajes
 Salida: Devuelve  el total de contactos almacenados 
 """
 def cantidad_Mensajes():
-    print("estas en cantidad menajes")
-    return busquedas()
+     contador=0 
+
+     archivo = open("Bitacora.txt", encoding="utf-8",mode = "r")
+     lineas = archivo.readlines()
+     archivo.close()
+
+     while lineas != []:
+         contador+=1
+         lineas= lineas[:-1]
+        
+     print()
+     print("El total de sus contactos es : ", contador)
+     print()
+     return busquedas()
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 """
@@ -418,9 +499,43 @@ fechas y los guarda en otro archivo.
 Restricciones: Formato de fechas válidas, El nombre del archivo no debe ser vacío 
 
 """ 
-def guardar_Mensajes():
-    print("estas en guardar mensaje")
-    return busquedas()
+def gu():
+    print()
+    print("Para realizar la busqueda de fechas debe ingresar el nombre del archivo en el que lo desea guardar.")
+    print()
+    print("Recuerde que el formato del archivo debe ser .txt")
+    print()
+    
+    nombreArchivo = input("Ingrese el nombre del archivo : ")
+    inicio= input("Ingrese el inicio : ")
+    final= input("Ingrese el final : ")
+    print()
+
+    if inicio != "" and final != "":
+        archivo = open("Bitacora.txt", encoding="utf-8", mode="r")
+        lineas = archivo.readlines()
+        archivo.close()
+
+        mensajes = []
+
+        for linea in lineas:
+            contenido = linea.strip().split(",")
+            registro = contenido[1]
+            
+
+            if inicio <= registro <= final:
+                men= lineas 
+                mensajes += linea[-2]
+                
+        if mensajes:
+            for mensaje in mensajes:
+                print(mensajes)
+        else:   
+           print("No se encontraron actividades en el rango de fechas especificado.")
+            
+    else:
+        print("Error: los valores de inicio y final no deben ser vacios")
+        return buscarfecha()
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -432,20 +547,9 @@ def salir():
 
 
 
-def registrar():
-    import datetime
-    fecha = datetime.datetime.now()
 
-    archivo = open("Bitacora.txt", encoding="utf-8",mode = "a")
-    archivo.write(str(fecha))
-    archivo.close()
             
 
 
 
-def prueba():
-    codigo=0
-    while codigo == codigo:
-        codigo+=1
-    print(codigo)    
 
