@@ -499,11 +499,15 @@ fechas y los guarda en otro archivo.
 Restricciones: Formato de fechas válidas, El nombre del archivo no debe ser vacío 
 
 """ 
-def gu():
+def guardar_Mensajes():
     print()
-    print("Para realizar la busqueda de fechas debe ingresar el nombre del archivo en el que lo desea guardar.")
+    print("~~~~~~~~~~~~~~~~~")
+    print("Guardar Mensajes")
+    print("~~~~~~~~~~~~~~~~~")
     print()
-    print("Recuerde que el formato del archivo debe ser .txt")
+    print("+Para realizar la busqueda de fechas debe ingresar el nombre del archivo en el que lo desea guardar.")
+    print()
+    print("+Recuerde que el formato del archivo debe ser .txt")
     print()
     
     nombreArchivo = input("Ingrese el nombre del archivo : ")
@@ -515,27 +519,37 @@ def gu():
         archivo = open("Bitacora.txt", encoding="utf-8", mode="r")
         lineas = archivo.readlines()
         archivo.close()
+        coincidencias = False
 
-        mensajes = []
+        
 
         for linea in lineas:
             contenido = linea.strip().split(",")
             registro = contenido[1]
+          
             
 
             if inicio <= registro <= final:
-                men= lineas 
-                mensajes += linea[-2]
+                coincidencias= True
+                mensajes = contenido[-1]
+                archivo2 = open(nombreArchivo,encoding="utf-8", mode="a")
+                archivo2.write(mensajes)
+                archivo2.write("\n")
+                archivo.close()
+
+        if coincidencias == True:
+            print("Sus mensajes han sido guardados exitosamente :)")
+            print()
+            return bitacora()
                 
-        if mensajes:
-            for mensaje in mensajes:
-                print(mensajes)
-        else:   
-           print("No se encontraron actividades en el rango de fechas especificado.")
+        else:
+            print("No se encontraron actividades en el rango de fechas especificado.")
+            print()
+            return guardar_Mensajes()
             
     else:
         print("Error: los valores de inicio y final no deben ser vacios")
-        return buscarfecha()
+        
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
