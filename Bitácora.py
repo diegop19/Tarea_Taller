@@ -165,7 +165,7 @@ def registrarActividad():
     usuario = input("Ingrese su usario: ")
     largoU= contarDigitos(usuario)
     if(usuario != ""):
-        if largoU < 8:
+        if largoU <= 8:
             
             archivo = open("Bitacora.txt", encoding="utf-8",mode = "a")
             archivo.write(usuario)
@@ -180,7 +180,7 @@ def registrarActividad():
     aplicacion = input("Ingrese la aplicacion: ")
     largoA= contarDigitos(aplicacion)
     if(aplicacion != ""):
-        if largoA < 16:
+        if largoA <= 16:
 
             archivo = open("Bitacora.txt", encoding="utf-8",mode = "a")
             archivo.write(aplicacion)
@@ -196,7 +196,7 @@ def registrarActividad():
     mensaje = input("Ingrese su mensaje: ")
     largoM= contarDigitos(mensaje)
     if(mensaje != ""):
-        if largoM < 50:
+        if largoM <= 50:
             
             archivo = open("Bitacora.txt", encoding="utf-8",mode = "a")
             archivo.write(mensaje)
@@ -263,11 +263,32 @@ respectivo al usuario
 
 """
 def borrarActividad():
-    print("estas en borrar actividad")
+    print()
+    codigo= input("Ingrese el codigo de la actividad que desea borrar: ")
+
+    if codigo != "":
+    
+        archivo = open("Bitacora.txt", encoding="utf-8", mode="r")
+        lineas = archivo.readlines()
+        archivo.close()
+        
+        archivo = open("Bitacora.txt", encoding="utf-8", mode="w")
+
+        for linea in lineas:
+            contenido = linea.strip().split(",")
+            registro = contenido[0]
+            if codigo != registro:
+                archivo.write(linea)
+        archivo.close()
+        
+        print("La actividad con código", codigo, "ha sido borrada exitosamente.")
+    else:
+          print("Error: el código de la actividad no debe ser vacío.")
+
     return registro_de_Actividades()
 
-    
-    
+
+
 
 
 """
@@ -283,9 +304,94 @@ Tamaño máximo del texto, 50 caracteres
 """     
 
 def modificarActividad():
-    print("estas en modificar")
+     
+    codigo= input("Ingrese el codigo de la actividad que desea modificar: ")
+
+    if codigo != "":
+    
+        archivo = open("Bitacora.txt", encoding="utf-8", mode="r")
+        lineas = archivo.readlines()
+        archivo.close()
+
+        modificar = registrarV2()
+        modificar = str(modificar)
+        
+        archivo = open("Bitacora.txt", encoding="utf-8", mode="w")
+        
+        for linea in lineas:
+            contenido = linea.strip().split(",")
+            registro = contenido[0]
+            if codigo != registro:
+                archivo.write(linea)
+            else:
+                 archivo.write(codigo)
+                 archivo.write(",")
+                 archivo.write(modificar)
+                 archivo.write("\n")
+        archivo.close()
+        
+        print("La actividad con código", codigo, "ha sido modificada exitosamente.")
+    else:
+          print("Error: el código de la actividad no debe ser vacío.")
+
     return registro_de_Actividades()
 
+
+
+def registrarV2():
+    
+    import datetime
+    fecha = datetime.date.today()
+    fechaA = fecha.strftime("%d/%m/%Y")
+    
+
+  
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Ingresar el valor de  la hora actual 
+    
+    hora = datetime.datetime.now().time()
+    horaA = hora.strftime("%I:%M:%S %p")
+    
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~
+#USUARIO
+    print()
+    usuario = input("Ingrese el usuario que desea modificar : ")
+    largoU= contarDigitos(usuario)
+    if(usuario != ""):
+        if largoU <= 8:
+            None
+        else:
+            return "Error: el usuario debe tener como maximo 8 caracteres"
+    else:
+        return "Error: el usuario no debe ser vacio"
+#APLICACION
+    print()
+    aplicacion = input("Ingrese la aplicacion que desea modificar: ")
+    largoA= contarDigitos(aplicacion)
+    if(aplicacion != ""):
+        if largoA <= 16:
+            None
+
+        else:
+            return "Error: la aplicacion debe tener como maximo 16 caracteres"   
+    else:
+        print("Error: la aplicacion no debe ser vacia")    
+
+#MENSAJE
+    print()
+    mensaje = input("Ingrese el mensaje que desea modificar : ")
+    largoM= contarDigitos(mensaje)
+    if(mensaje != ""):
+        if largoM <= 50:
+    
+            return fechaA + ',' + horaA + ',' + usuario + ',' + aplicacion + ',' + mensaje
+            
+        else:
+            return "Error: el mensaje debe tener como maximo 50 caracteres"    
+    else:
+        print("Error: el mensaje no debe ser vacio")
 
     
 """
@@ -293,7 +399,18 @@ Nombre: Ver actividades
 Salida: Todos los contactos registrados 
 """  
 def verActividades():
-    print("estas en ver actividades")
+    print()
+    print("Actividades registradas : ")
+    print()
+
+    archivo = open("Bitacora.txt", encoding="utf-8",mode = "r")
+    lineas = archivo.readlines()
+    archivo.close()
+
+    for linea in lineas:
+        if linea != "":
+           print(linea)
+       
     return registro_de_Actividades()
 
 
@@ -515,7 +632,7 @@ def guardar_Mensajes():
     final= input("Ingrese el final : ")
     print()
 
-    if inicio != "" and final != "":
+    if inicio != "" and final != "" and nombreArchivo != "":
         archivo = open("Bitacora.txt", encoding="utf-8", mode="r")
         lineas = archivo.readlines()
         archivo.close()
@@ -548,15 +665,16 @@ def guardar_Mensajes():
             return guardar_Mensajes()
             
     else:
-        print("Error: los valores de inicio y final no deben ser vacios")
+        print("Error: los valores de inicio, final o el nombre del archivo no deben ser vacios")
         
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 def salir():
-    return "Gracias por usar la bitacora"
-
-
+    print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+    print( "Gracias por usar la bitacora")
+    print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+    return 
 
 
 
