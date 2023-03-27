@@ -130,7 +130,7 @@ def registrarActividad():
     codigo= code()
     codigo= str(codigo)
     
-    archivo = open("Bitacora.txt", encoding="utf-8",mode = "a")
+    archivo = open("Bitácora.txt", encoding="utf-8",mode = "a")
     archivo.write(codigo)
     archivo.write(",")
     archivo.close()
@@ -143,7 +143,7 @@ def registrarActividad():
     fecha = datetime.date.today()
     fechaA = fecha.strftime("%d/%m/%Y")
 
-    archivo = open("Bitacora.txt", encoding="utf-8",mode = "a")
+    archivo = open("Bitácora.txt", encoding="utf-8",mode = "a")
     archivo.write(str(fechaA))
     archivo.write(",")
     archivo.close()
@@ -153,7 +153,7 @@ def registrarActividad():
     hora = datetime.datetime.now().time()
     horaA = hora.strftime("%I:%M:%S %p")
 
-    archivo = open("Bitacora.txt", encoding="utf-8",mode = "a")
+    archivo = open("Bitácora.txt", encoding="utf-8",mode = "a")
     archivo.write(str(horaA))
     archivo.write(",")
     archivo.close()
@@ -167,7 +167,7 @@ def registrarActividad():
     if(usuario != ""):
         if largoU <= 8:
             
-            archivo = open("Bitacora.txt", encoding="utf-8",mode = "a")
+            archivo = open("Bitácora.txt", encoding="utf-8",mode = "a")
             archivo.write(usuario)
             archivo.write(",")
             archivo.close()
@@ -182,7 +182,7 @@ def registrarActividad():
     if(aplicacion != ""):
         if largoA <= 16:
 
-            archivo = open("Bitacora.txt", encoding="utf-8",mode = "a")
+            archivo = open("Bitácora.txt", encoding="utf-8",mode = "a")
             archivo.write(aplicacion)
             archivo.write(",")
             archivo.close()
@@ -198,7 +198,7 @@ def registrarActividad():
     if(mensaje != ""):
         if largoM <= 50:
             
-            archivo = open("Bitacora.txt", encoding="utf-8",mode = "a")
+            archivo = open("Bitácora.txt", encoding="utf-8",mode = "a")
             archivo.write(mensaje)
             archivo.write("\n")
             archivo.close()
@@ -223,7 +223,7 @@ def registrarActividad():
 def code():
     codigoNuevo=0
 
-    archivo= open("Bitacora.txt",encoding="utf-8",mode = "r")
+    archivo= open("Bitácora.txt",encoding="utf-8",mode = "r")
     lineas=archivo.readlines()
     archivo.close
 
@@ -268,11 +268,11 @@ def borrarActividad():
 
     if codigo != "":
     
-        archivo = open("Bitacora.txt", encoding="utf-8", mode="r")
+        archivo = open("Bitácora.txt", encoding="utf-8", mode="r")
         lineas = archivo.readlines()
         archivo.close()
         
-        archivo = open("Bitacora.txt", encoding="utf-8", mode="w")
+        archivo = open("Bitácora.txt", encoding="utf-8", mode="w")
 
         for linea in lineas:
             contenido = linea.strip().split(",")
@@ -309,14 +309,14 @@ def modificarActividad():
 
     if codigo != "":
     
-        archivo = open("Bitacora.txt", encoding="utf-8", mode="r")
+        archivo = open("Bitácora.txt", encoding="utf-8", mode="r")
         lineas = archivo.readlines()
         archivo.close()
 
         modificar = registrarV2()
         modificar = str(modificar)
         
-        archivo = open("Bitacora.txt", encoding="utf-8", mode="w")
+        archivo = open("Bitácora.txt", encoding="utf-8", mode="w")
         
         for linea in lineas:
             contenido = linea.strip().split(",")
@@ -403,7 +403,7 @@ def verActividades():
     print("Actividades registradas : ")
     print()
 
-    archivo = open("Bitacora.txt", encoding="utf-8",mode = "r")
+    archivo = open("Bitácora.txt", encoding="utf-8",mode = "r")
     lineas = archivo.readlines()
     archivo.close()
 
@@ -480,7 +480,7 @@ def buscarUsuario():
     coincidencia = False
     if usuario != "":
         
-       archivo = open("Bitacora.txt", encoding="utf-8",mode = "r")
+       archivo = open("Bitácora.txt", encoding="utf-8",mode = "r")
        lineas = archivo.readlines()
        archivo.close()
 
@@ -519,7 +519,7 @@ def buscarAplicacion():
     coincidencia = False
     if aplicacion != "":
         
-       archivo = open("Bitacora.txt", encoding="utf-8",mode = "r")
+       archivo = open("Bitácora.txt", encoding="utf-8",mode = "r")
        lineas = archivo.readlines()
        archivo.close()
 
@@ -561,7 +561,7 @@ def buscarFecha():
     print()
 
     if inicio != "" and final != "":
-        archivo = open("Bitacora.txt", encoding="utf-8", mode="r")
+        archivo = open("Bitácora.txt", encoding="utf-8", mode="r")
         lineas = archivo.readlines()
         archivo.close()
 
@@ -594,7 +594,7 @@ Salida: Devuelve  el total de contactos almacenados
 def cantidad_Mensajes():
      contador=0 
 
-     archivo = open("Bitacora.txt", encoding="utf-8",mode = "r")
+     archivo = open("Bitácora.txt", encoding="utf-8",mode = "r")
      lineas = archivo.readlines()
      archivo.close()
 
@@ -633,7 +633,7 @@ def guardar_Mensajes():
     print()
 
     if inicio != "" and final != "" and nombreArchivo != "":
-        archivo = open("Bitacora.txt", encoding="utf-8", mode="r")
+        archivo = open("Bitácora.txt", encoding="utf-8", mode="r")
         lineas = archivo.readlines()
         archivo.close()
         coincidencias = False
