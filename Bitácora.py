@@ -52,10 +52,12 @@ def bitacora():
             elif opcion == 5:
                 return salir()
             else:
-                print( "Digite una opcion valida")
+                print( "Digite un valor entre uno y cinco")
                 return bitacora()
     else:
-         return "Error digite un valor entre 1 y 5"
+         print ("Digite una opcion valida")
+         return bitacora()
+        
 #--------------------------------------------------------------------------------------
 """
 Nombre: Registro de actividades
@@ -103,9 +105,11 @@ def registro_de_Actividades():
             elif opcion == 15:
                 return bitacora()
             else:
-                return "Digite una opcion valida"
+                print( "Digite una opcion valida")
+                return registro_de_Actividades()
      else:
-         return "Error digite un valor entre 11 y 15"
+         print( "Error digite un valor entre 11 y 15")
+         return registro_de_Actividades()
      
 
 """
@@ -462,7 +466,7 @@ def busquedas():
             else:
                 return "Digite una opcion valida"
      else:
-         return "Error digite un valor entre 11 y 15"
+         return "Error digite un valor entre 21 y 24"
      
 
 """
@@ -558,7 +562,6 @@ def buscarFecha():
     
     inicio= input("Ingrese el inicio : ")
     final= input("Ingrese el final : ")
-    print()
 
     if inicio != "" and final != "":
         archivo = open("Bitácora.txt", encoding="utf-8", mode="r")
@@ -622,7 +625,7 @@ def guardar_Mensajes():
     print("Guardar Mensajes")
     print("~~~~~~~~~~~~~~~~~")
     print()
-    print("+Para realizar la busqueda de fechas debe ingresar el nombre del archivo en el que lo desea guardar.")
+    print("+Para guardar mensajes debe ingresar el nombre del archivo en el que lo desea guardar.")
     print()
     print("+Recuerde que el formato del archivo debe ser .txt")
     print()
